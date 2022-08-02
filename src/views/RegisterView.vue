@@ -10,9 +10,9 @@
       VALIDATION ERRORS
       <form @submit.prevent='onSubmit'>
         <fieldset class='flex flex-col'>
-          <input type='text' placeholder='Username' class='input'>
-          <input type='email' placeholder='Email' class='input'>
-          <input type='password' placeholder='Password' class='input'>
+          <input type='text' placeholder='Username' class='input' v-model='username'>
+          <input type='email' placeholder='Email' class='input' v-model='email'>
+          <input type='password' placeholder='Password' class='input' v-model='password'>
         </fieldset>
         <button class='submitBtn' :disabled='isSubmitting'>Sign Up</button>
       </form>
@@ -23,6 +23,13 @@
 <script>
 export default {
   name: 'RegisterView',
+  data() {
+    return {
+      email: '',
+      username: '',
+      password: ''
+    }
+  },
   computed: {
     isSubmitting() {
       return this.$store.state.auth.isSubmitting
@@ -31,12 +38,13 @@ export default {
   methods: {
     onSubmit() {
       this.$store.dispatch('register', {
-        email: 'dadsa12f22da@yandex.ru',
-        username: 'd12s4fada',
-        password: 'dd124fadsasdas'
+        email: this.email,
+        username: this.username,
+        password: this.password
       })
         .then(user => {
           console.log('successfully register user', user)
+          this.$router.push({name: 'home'})
         })
     }
   }
