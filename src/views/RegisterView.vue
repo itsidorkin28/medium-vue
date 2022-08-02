@@ -9,12 +9,12 @@
     <div class='w-2/5 mx-auto relative'>
       VALIDATION ERRORS
       <form @submit.prevent='onSubmit'>
-          <fieldset class='flex flex-col'>
-            <input type='text' placeholder='Username' class='input'>
-            <input type='email' placeholder='Email' class='input'>
-            <input type='password' placeholder='Password' class='input'>
-          </fieldset>
-         <button class='submitBtn'>Sign Up</button>
+        <fieldset class='flex flex-col'>
+          <input type='text' placeholder='Username' class='input'>
+          <input type='email' placeholder='Email' class='input'>
+          <input type='password' placeholder='Password' class='input'>
+        </fieldset>
+        <button class='submitBtn' :disabled='isSubmitting'>Sign Up</button>
       </form>
     </div>
   </div>
@@ -23,9 +23,21 @@
 <script>
 export default {
   name: 'RegisterView',
+  computed: {
+    isSubmitting() {
+      return this.$store.state.auth.isSubmitting
+    }
+  },
   methods: {
     onSubmit() {
-      console.log('form')
+      this.$store.dispatch('register', {
+        email: 'dadsa12f22da@yandex.ru',
+        username: 'd12s4fada',
+        password: 'dd124fadsasdas'
+      })
+        .then(user => {
+          console.log('successfully register user', user)
+        })
     }
   }
 }
@@ -37,9 +49,9 @@ export default {
 }
 
 .submitBtn {
-  @apply w-1/3 bg-green-500 text-white px-5 py-3 rounded hover:bg-green-700 absolute right-0;
+  @apply w-1/3 bg-green-500 text-white px-5 py-3 rounded
+  hover:bg-green-700 absolute right-0 disabled:opacity-50 disabled:bg-green-700;
 }
-
 
 
 </style>
