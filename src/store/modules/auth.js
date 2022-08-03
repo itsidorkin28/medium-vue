@@ -1,4 +1,5 @@
 import authApi from '@/api/auth'
+import {setItem} from '@/helpers/persistanceStorage'
 
 const state = {
   isSubmitting: false,
@@ -30,6 +31,7 @@ const actions = {
       const {data} = await authApi.register(credentials)
       console.log(data.user)
       context.commit('registerSuccess', data.user)
+      setItem('accessToken', data.user.token)
       return data
     } catch (e) {
       console.log('errors', e)
