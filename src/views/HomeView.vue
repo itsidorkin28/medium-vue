@@ -1,7 +1,7 @@
 <template>
-  <h1 class="text-3xl font-bold underline">
-    Hello world! It's home!
-  </h1>
+  <div>
+    Home
+  </div>
 </template>
 
 <script>
