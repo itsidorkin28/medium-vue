@@ -1,8 +1,18 @@
 <template>
   <div>
-    <h1>Medium clone!</h1>
-
+    <top-bar/>
     <router-view></router-view>
   </div>
 </template>
+
+<script>
+import TopBar from '@/components/TopBar'
+
+export default {
+  name: 'App',
+  components: {
+    TopBar
+  }
+}
+</script>
 
