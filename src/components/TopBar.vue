@@ -24,13 +24,14 @@
             </router-link>
           </li>
           <li>
-            <router-link class='flex' :to="{name: 'userProfile', params: {slug: currentUser.username}}" active-class='active'>
+            <router-link class='flex' :to="{name: 'userProfile', params: {slug: currentUser.username}}"
+                         active-class='active'>
               <img class='mr-1' :src='currentUser.image' alt='userAvatar'>
-              {{currentUser.username}}
+              {{ currentUser.username }}
             </router-link>
           </li>
         </template>
-        <template v-if='!isLoggedIn'>
+        <template v-if='isAnonymous'>
           <li>
             <router-link :to="{name: 'login'}" active-class='active'>
               Sign In
@@ -48,14 +49,16 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import {getterTypes} from '@/store/modules/auth'
+import {mapGetters} from 'vuex'
 
 export default {
   name: 'TopBar',
   computed: {
-    ...mapState({
-      currentUser: state => state.auth.currentUser,
-      isLoggedIn: state => state.auth.isLoggedIn
+    ...mapGetters({
+      currentUser: getterTypes.currentUsers,
+      isLoggedIn: getterTypes.isLoggedIn,
+      isAnonymous: getterTypes.isAnonymous
     })
   }
 }
@@ -66,6 +69,7 @@ export default {
 li {
   @apply text-gray-400 hover:text-gray-500 transition-colors mr-4 last:mr-0;
 }
+
 .active {
   @apply text-gray-500 font-bold;
 }
