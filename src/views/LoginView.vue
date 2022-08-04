@@ -21,7 +21,7 @@
 
 <script>
 import ValidationErrors from '@/components/ValidationErrors'
-import {actionsTypes} from '@/store/modules/auth'
+import {actionTypes} from '@/store/modules/auth'
 import {mapState} from 'vuex'
 
 export default {
@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     onSubmit() {
-      this.$store.dispatch(actionsTypes.login, {
+      this.$store.dispatch(actionTypes.login, {
         email: this.email,
         password: this.password
       })

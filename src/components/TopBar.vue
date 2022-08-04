@@ -56,7 +56,7 @@ export default {
   name: 'TopBar',
   computed: {
     ...mapGetters({
-      currentUser: getterTypes.currentUsers,
+      currentUser: getterTypes.currentUser,
       isLoggedIn: getterTypes.isLoggedIn,
       isAnonymous: getterTypes.isAnonymous
     })
